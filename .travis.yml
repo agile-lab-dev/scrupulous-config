@@ -1,0 +1,26 @@
+language: scala
+jdk: openjdk8
+script:
+  bin/make.sh
+sudo: false
+cache:
+  directories:
+    - "$HOME/.ivy2/cache"
+    - "$HOME/.sbt/1.0"
+    - "$HOME/.sbt/boot"
+    - "$HOME/.sbt/preloaded"
+before_cache:
+  - rm -fv $HOME/.ivy2/.sbt.ivy.lock
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+  - find $HOME/.sbt        -name "*.lock"               -print -delete
+git:
+  depth: false
+branches:
+  only:
+    - master
+    - develop
+    - /^feature\/.*$/
+    - /^release\/.*$/
+    - /^hotfix\/.*$/
+    - /^hotfix\/.*$/
+    - /^\d+\.\d+(\.\d+)?$/
